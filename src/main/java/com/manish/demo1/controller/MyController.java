@@ -45,15 +45,15 @@ public class MyController {
 	}
 	
 	@GetMapping("/courses/{courseId}")
-	public ResponseEntity<Errors> getCourse(@PathVariable String courseId){
+	public ResponseEntity<Course> getCourse(@PathVariable String courseId){
 		try {
-			return this.courseService.getCourse(Long.parseLong(courseId));
+			Course x = new Course();
+			x = this.courseService.getCourse(Long.parseLong(courseId));
+			return new ResponseEntity<>(x,HttpStatus.INTERNAL_SERVER_ERROR);
 			
 		}
 		catch(Exception e){
-			final Errors y = null;
-			y.setError("Course not found");
-			return new ResponseEntity<>(y,HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	

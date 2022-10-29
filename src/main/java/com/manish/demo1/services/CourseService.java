@@ -11,7 +11,7 @@ public interface CourseService {
 
 	public List<Course> getCourses();
 	
-	public ResponseEntity<Errors> getCourse(long courseId);
+	public Course  getCourse(long courseId);
 	
 	public Course addCourse(Course course);
 }
