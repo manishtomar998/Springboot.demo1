@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.manish.demo1.entities.Course;
 import com.manish.demo1.entities.Notfound;
+import com.manish.demo1.exceptions.Coursesexception;
 import com.manish.demo1.services.CourseService;
 
 @RestController
@@ -46,15 +47,10 @@ public class MyController {
 	}
 	
 	@DeleteMapping("/courses/{courseId}")
-	public ResponseEntity<Notfound> deleteCourse(@PathVariable String courseId){
-		try {
+	public ResponseEntity<Notfound> deleteCourse(@PathVariable String courseId) throws Coursesexception{
 			Notfound msg = new Notfound();
 			msg = this.courseService.deleteCourse(Long.parseLong(courseId));
 			return new ResponseEntity<>(msg,HttpStatus.OK);
-		}
-		catch(Exception e){
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
 	}
 	
 }
