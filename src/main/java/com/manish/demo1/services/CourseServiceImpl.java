@@ -2,10 +2,12 @@ package com.manish.demo1.services;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
 import com.manish.demo1.entities.Course;
+import com.manish.demo1.entities.Notfound;
 
 @Service
 public class CourseServiceImpl implements CourseService {
@@ -29,11 +31,13 @@ public class CourseServiceImpl implements CourseService {
 	@Override
 	public Course getCourse(long courseId) {
 		// TODO Auto-generated method stub
-		Course c=null;
+		Course c=new Course();
 		for(Course course:list) {
 			if(course.getId()==courseId) {
 				c=course;
 				break;
+			} else {
+				c.setId(90);
 			}
 		}
 		return c;
@@ -45,6 +49,20 @@ public class CourseServiceImpl implements CourseService {
 		// TODO Auto-generated method stub
 		list.add(course);
 		return course;
+	}
+	
+	@Override
+	public Notfound deleteCourse(long courseId) {
+		// TODO Auto-generated method stub
+		List<Course> nako = list;
+		list = this.list.stream().filter(e->e.getId()!=courseId).collect(Collectors.toList());
+		if(nako.size()==list.size()) {
+			Notfound msg = new Notfound();
+			msg.setError("Id not found");
+			return msg;
+		}
+		return null;
+
 	}
 
 }
