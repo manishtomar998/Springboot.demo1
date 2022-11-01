@@ -2,51 +2,43 @@ package com.manish.demo1.entities;
 
 public class Course {
 
-	private long id;
-	private String title;
-	private String description;
-	
-	public Course(long id, String title, String description) {
-		super();
-		this.id = id;
-		this.title = title;
-		this.description = description;
-	}
+	private String documentId;
+	private String name;
+	private String desc;
 
+	@Override
+	public String toString() {
+		return "Course [documentId=" + documentId + ", name=" + name + ", desc=" + desc + "]";
+	}
+	public String getDocumentId() {
+		return documentId;
+	}
+	public void setDocumentId(String documentId) {
+		this.documentId = documentId;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getDesc() {
+		return desc;
+	}
+	public void setDesc(String desc) {
+		this.desc = desc;
+	}
 	public Course() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public long getId() {
-		return id;
+	public Course(String documentId, String name, String desc) {
+		super();
+		this.documentId = documentId;
+		this.name = name;
+		this.desc = desc;
 	}
 
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	@Override
-	public String toString() {
-		return "Course [id=" + id + ", title=" + title + ", description=" + description + "]";
-	}
-	
-	
 	
 }

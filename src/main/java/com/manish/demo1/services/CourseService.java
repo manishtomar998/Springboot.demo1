@@ -1,17 +1,21 @@
 package com.manish.demo1.services;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import com.manish.demo1.entities.Course;
-import com.manish.demo1.entities.Notfound;
 
 public interface CourseService {
 
-	public List<Course> getCourses();
+	public List<Course> getCourses() throws InterruptedException, ExecutionException;
 	
-	public Course  getCourse(long courseId);
+	public Course getCourse(String documentId) throws InterruptedException, ExecutionException;
+		
+	public String addCourse(Course course) throws InterruptedException, ExecutionException;
 	
-	public Course addCourse(Course course);
+	public String updateCourse(Course course) throws InterruptedException, ExecutionException;
 
-	public Notfound deleteCourse(long parseLong);
+	public String deleteCourse(String documentId);
+
+
 }

@@ -1,25 +1,22 @@
 package com.manish.demo1.controller;
 
-import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import java.util.List;
+
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.manish.demo1.entities.Course;
-import com.manish.demo1.entities.Notfound;
-import com.manish.demo1.exceptions.Coursesexception;
 import com.manish.demo1.services.CourseService;
 
+
 @RestController
-@RequestMapping("/aligarh")
 public class MyController {
 	
 	@Autowired
@@ -30,29 +27,36 @@ public class MyController {
 		return "This is home page";
 	}
 	
+
+	
 //	get the courses
 	
 	@GetMapping("/courses")
-	public  List<Course> getCourses()
+	public List<Course> getCourses() throws InterruptedException, ExecutionException
 	{
 		return this.courseService.getCourses();
 	}
 	
-	@GetMapping("/courses/{courseId}")
-	public Course getCourse(@PathVariable String courseId) {
-		return this.courseService.getCourse(Long.parseLong(courseId));
+	@GetMapping("/course")
+	public Course getCourse(@RequestParam String documentId) throws InterruptedException, ExecutionException
+	{
+		return this.courseService.getCourse(documentId);
+	}
+	
+	
+	@PutMapping("/courses")
+	public String updateCourse(@RequestBody Course course) throws InterruptedException, ExecutionException {
+		return this.courseService.updateCourse(course);
 	}
 	
 	@PostMapping("/courses")
-	public Course addCourse(@RequestBody Course course) {
+	public String addCourse(@RequestBody Course course) throws InterruptedException, ExecutionException {
 		return this.courseService.addCourse(course);
 	}
 	
-	@DeleteMapping("/courses/{courseId}")
-	public ResponseEntity<Notfound> deleteCourse(@PathVariable String courseId) throws Coursesexception{
-			Notfound msg = new Notfound();
-			msg = this.courseService.deleteCourse(Long.parseLong(courseId));
-			return new ResponseEntity<>(msg,HttpStatus.OK);
+	@DeleteMapping("/courses")
+	public String addCourse(@RequestParam String documentId) throws InterruptedException, ExecutionException {
+		return this.courseService.deleteCourse(documentId);
 	}
 	
 }
